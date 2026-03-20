@@ -1,44 +1,69 @@
 #include <stdio.h>
-double mat[3][3];
-int matf[2][2],m,s,sqrt_matf[2][2],i;
-
-double print_mat()
-{
-	for(int i = 0; i < 3; i++)
-	{
-		for(int j = 0; j < 3; j++)
-		{
-			printf(" [%lf]",mat[i][j]);
-		}
-		printf("\n");
-	}
-}
+int matf[2][2],m,s,sqrt_matf[2][2],b;
 
 int main(void)
 {
+	printf("Enter size: ");
+	scanf("%d",&b);
+	double mat[b][b];
+	for(int i = 0; i < b; i++)
+	{
+		for(int j = 0; j < b; j++)
+		{
+			printf("Enter mat[%d][%d]: ", i, j);
+			scanf("%lf",&mat[i][j]);
+		}
+	}
 	
-	m = mat[0][0] + mat[1][1] + mat[2][2];
-	s = mat[2][0] + mat[1][1] + mat[0][2];
+	for(int i = 0; i < b; i++)
+	{
+		m = m + mat[i][i];
+	}
+	for(int i = 0, j = (b-1); i < b, j > -1; i++, j--)
+	{
+		
+		s = s + mat[j][i];
+	}
 	
-	print_mat(mat);
-	printf("main = %d, sub = %d",m,s);
+	for(int i = 0; i < b; i++)
+	{
+		for(int j = 0; j < b; j++)
+		{
+			printf("[%lf]", mat[i][j]);
+		}
+		printf("\n");
+	}
+	printf("main = %d, sub = %d\n",m,s);
 	
 	for(int i = 0; i < 2; i++)
 	{
 		for(int j = 0; j < 2; j++)
 		{
-			printf("Enter matf[%d][%d]:",i,j);
-			scanf(" %lf",&matf[i][j]);
+			printf("Enter matf[%d][%d]: ",i,j);
+			scanf("%d",&matf[i][j]);
 		}
 	}
-	b = 2;
-	print_mat(matf);
+	for(int i = 0; i < 2; i++)
+	{
+		for(int j = 0; j < 2; j++)
+		{
+			printf("[%d]", matf[i][j]);
+		}
+		printf("\n");
+	}
 	
 	sqrt_matf[0][0] = matf[0][0] * matf[0][0] + matf[0][1] * matf[1][0];
 	sqrt_matf[0][1] = matf[0][0] * matf[1][0] + matf[0][1] * matf[1][1];
 	sqrt_matf[1][0] = matf[1][0] * matf[0][0] + matf[1][1] * matf[1][0];
 	sqrt_matf[1][1] = matf[1][0] * matf[1][0] + matf[1][1] * matf[1][1];
-	print_mat(2, sqrt_matf);
+	for(int i = 0; i < 2; i++)
+	{
+		for(int j = 0; j < 2; j++)
+		{
+			printf("[%d]", sqrt_matf[i][j]);
+		}
+		printf("\n");
+	}
 	
 	return 0;
 }
