@@ -52,10 +52,14 @@ int main(void)
 		printf("\n");
 	}
 	
-	sqrt_matf[0][0] = matf[0][0] * matf[0][0] + matf[0][1] * matf[1][0];
-	sqrt_matf[0][1] = matf[0][0] * matf[1][0] + matf[0][1] * matf[1][1];
-	sqrt_matf[1][0] = matf[1][0] * matf[0][0] + matf[1][1] * matf[1][0];
-	sqrt_matf[1][1] = matf[1][0] * matf[1][0] + matf[1][1] * matf[1][1];
+	for (int i = 0; i < 2; i++) {
+        for (int j = 0; j < 2; j++) {
+            for (int k = 0; k < 2; k++) {
+                sqrt_matf[i][j] += matf[i][k] * matf[k][j];
+            }
+        }
+    }
+    
 	for(int i = 0; i < 2; i++)
 	{
 		for(int j = 0; j < 2; j++)
