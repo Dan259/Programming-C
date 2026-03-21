@@ -9,14 +9,8 @@ int main(void)
 	str[80] = '\0';
 	for(int i = 0; i < strlen(str); i++)
 	{
-		if(str[i] == 'a')
-		{
-			str[i] = 'A';
-		}
-		if(str[i] == 'b')
-		{
-			str[i] = 'B';
-		}
+		if(str[i] == 'a') str[i] = 'A';
+		if(str[i] == 'b') str[i] = 'B';
 	}
 	printf("%s",str);
 }
