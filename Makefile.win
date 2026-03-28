@@ -1,15 +1,15 @@
-# Project: Lab1.1
+# Project: Num4
 # Makefile created by Dev-C++ 5.11
 
 CPP      = g++.exe
 CC       = gcc.exe
 WINDRES  = windres.exe
-OBJ      = Num1.o Num2.o Num3.o
-LINKOBJ  = Num1.o Num2.o Num3.o
-LIBS     = -L"C:/Dev-Cpp 5.11 TDM-GCC x64 4.9.2 Portable/Dev-Cpp/MinGW64/lib" -L"C:/Dev-Cpp 5.11 TDM-GCC x64 4.9.2 Portable/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc
-INCS     = -I"C:/Dev-Cpp 5.11 TDM-GCC x64 4.9.2 Portable/Dev-Cpp/MinGW64/include" -I"C:/Dev-Cpp 5.11 TDM-GCC x64 4.9.2 Portable/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Dev-Cpp 5.11 TDM-GCC x64 4.9.2 Portable/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
-CXXINCS  = -I"C:/Dev-Cpp 5.11 TDM-GCC x64 4.9.2 Portable/Dev-Cpp/MinGW64/include" -I"C:/Dev-Cpp 5.11 TDM-GCC x64 4.9.2 Portable/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Dev-Cpp 5.11 TDM-GCC x64 4.9.2 Portable/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Dev-Cpp 5.11 TDM-GCC x64 4.9.2 Portable/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++"
-BIN      = Lab1.1.exe
+OBJ      = main.o math.o
+LINKOBJ  = main.o math.o
+LIBS     = -L"C:/Прога/Dev-Cpp/MinGW64/lib" -L"C:/Прога/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc
+INCS     = -I"C:/Прога/Dev-Cpp/MinGW64/include" -I"C:/Прога/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Прога/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
+CXXINCS  = -I"C:/Прога/Dev-Cpp/MinGW64/include" -I"C:/Прога/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Прога/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Прога/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++"
+BIN      = Num4.exe
 CXXFLAGS = $(CXXINCS) 
 CFLAGS   = $(INCS) 
 RM       = rm.exe -f
@@ -24,11 +24,8 @@ clean: clean-custom
 $(BIN): $(OBJ)
 	$(CC) $(LINKOBJ) -o $(BIN) $(LIBS)
 
-Num1.o: Num1.cpp
-	$(CC) -c Num1.cpp -o Num1.o $(CFLAGS)
+main.o: main.c
+	$(CC) -c main.c -o main.o $(CFLAGS)
 
-Num2.o: Num2.cpp
-	$(CC) -c Num2.cpp -o Num2.o $(CFLAGS)
-
-Num3.o: Num3.cpp
-	$(CC) -c Num3.cpp -o Num3.o $(CFLAGS)
+math.o: math.c
+	$(CC) -c math.c -o math.o $(CFLAGS)
