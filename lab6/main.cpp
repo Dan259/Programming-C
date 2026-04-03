@@ -9,7 +9,6 @@ int byear[4], byear1;
 
 int main(){
 	while(fgets(str,100,data1) != NULL){
-		//printf("%s",str);
 		for(int i = (strlen(str) - 5),j = 0; j < 5; i++, j++){
 			byear[j] = str[i] - '0';
 			byear[j] = byear[j] > 0 ? byear[j] : 0;
