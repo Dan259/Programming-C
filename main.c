@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "PS.h"
+#include <stdbool.h>
 
 int main(void) 
 {
@@ -14,7 +15,9 @@ int main(void)
 	printf("Enter c: ");
 	scanf("%lf",&c);
 	
-	if(a + b > c && a + c > b && b + c > a)
+	bool res = check_triangle(a, b, c);
+	
+	if(res)
 	{
 		double P = perimeter(a, b, c);
 		double S = square(a, b, c);

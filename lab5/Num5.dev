@@ -1,6 +1,6 @@
 [Project]
-FileName=Num4.dev
-Name=Num4
+FileName=Num5.dev
+Name=Num5
 Type=1
 Ver=2
 ObjFiles=
@@ -12,7 +12,7 @@ MakeIncludes=
 Compiler=
 CppCompiler=
 Linker=
-IsCpp=0
+IsCpp=1
 Icon=
 ExeOutput=
 ObjectOutput=
@@ -50,9 +50,9 @@ ProductVersion=
 AutoIncBuildNr=0
 SyncProduct=1
 
-[Unit2]
-FileName=math.c
-CompileCpp=0
+[Unit1]
+FileName=main.cpp
+CompileCpp=1
 Folder=
 Compile=1
 Link=1
@@ -60,9 +60,9 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit1]
-FileName=main.c
-CompileCpp=0
+[Unit2]
+FileName=math.cpp
+CompileCpp=1
 Folder=
 Compile=1
 Link=1
@@ -71,8 +71,8 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit3]
-FileName=PS.h
-CompileCpp=0
+FileName=func.h
+CompileCpp=1
 Folder=
 Compile=1
 Link=1

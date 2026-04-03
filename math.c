@@ -1,5 +1,20 @@
 #include <math.h>
 #include "PS.h"
+#include <stdbool.h>
+
+bool check_triangle(double a, double b, double c)
+{
+	bool res;
+	if(a + b > c && a + c > b && b + c > a)
+	{
+		res = true;
+	}
+	else
+	{
+		res = false;
+	}
+	return res;
+}
 
 double perimeter(double a, double b, double c)
 {
