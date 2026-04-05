@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define MIN(x,y) x < y ? x : y
+#define MIN(x,y) x < y ? 1 : 0
 
 struct humen
 {
@@ -32,11 +32,11 @@ humen *file_input(){
     	fscanf(data, "%s %s %d", &mas[i].name, &mas[i].surname, &mas[i].age);
     	i++;
 	}
+	fclose(data);
 	return mas;
 }
 
 humen *cmd_input(){
-	int lines_count;
 	printf("Enter number of people: ");
 	scanf("%d", &lines_count);
 	struct humen *mas;
@@ -55,17 +55,30 @@ humen *cmd_input(){
 
 int main(){
 	struct humen *mas, *mas_sort;
-	int min = 0;
+	int min = 0, min_last = 99999, min_num;
 	mas = file_input();
 	mas_sort = (humen*)malloc(lines_count*sizeof(humen));
-	for(int i = 0;i < (lines_count-1); i++){
-		for(int j = 0;j < lines_count;j++){
-			if(mas[i].age != NULL){
-				min = MIN(mas[j].age, mas[(j+1)].age);
+	
+	for(int i = 0; i < lines_count; i++){
+		min_last = 99999;
+		for(min_num = 0; min_num < (lines_count+1); min_num++){
+			if(mas[min_num].age != NULL){
+				if(MIN(mas[min_num].age,min_last)){
+				min_last = mas[min_num].age;
+				min = min_num;
+				}
 			}
+			
 		}
-		
+		strcpy(mas_sort[i].name, mas[min].name);
+		strcpy(mas_sort[i].surname, mas[min].surname);
+		mas_sort[i].age = mas[min].age;
+		mas[min].age = NULL;
 	}
 	
+	
+	for(int i = 0;i < lines_count;i++){
+		printf("Name: %s Surname: %s Birth year: %d\n",mas_sort[i].name,mas_sort[i].surname,mas_sort[i].age);
+	}
 	free(mas);
 }
