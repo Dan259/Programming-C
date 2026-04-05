@@ -42,6 +42,7 @@ double **oper(double **mat1, double **mat2)
 	{
 		for (int i = 0; i < n; i++) {
 	        for (int j = 0; j < n; j++) {
+	        	res[i][j] = 0;
 	            for (int k = 0; k < n; k++) {
 	                res[i][j] += mat1[i][k] * mat2[k][j];
 	            }
