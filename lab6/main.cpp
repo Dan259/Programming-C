@@ -4,20 +4,13 @@
 
 FILE *data1 = fopen("IN.txt","r");
 FILE *data2 = fopen("OUT.txt","w");
-char str[100];
-int byear[4], byear1;
+int byear;
+char name[50], surname[50], otchestvo[50];
 
 int main(){
-	while(fgets(str,100,data1) != NULL){
-		for(int i = (strlen(str) - 5),j = 0; j < 5; i++, j++){
-			byear[j] = str[i] - '0';
-			byear[j] = byear[j] > 0 ? byear[j] : 0;
+	while (fscanf(data1, "%s %s %s %d", surname, name, otchestvo, &byear) == 4) {
+		if(surname[0] == 'I'){
+			fprintf(data2, "%s %s %s %d\n", surname, name, otchestvo, byear);
 		}
-		byear1 = byear[0] == 0 ? byear[1] * 1000 + byear[2] * 100 + byear[3] * 10 + byear[4] : byear[0] * 1000 + byear[1] * 100 + byear[2] * 10 + byear[3];
-		if(byear1 > 1980){
-			fputs(str,data2);
-		}
-		printf("%d\n", byear1);
-	}
-	
+    }
 }
