@@ -2,8 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define MIN(x,y) x < y ? 1 : 0
-
 struct humen
 {
 	char name[50];
@@ -50,32 +48,34 @@ humen *cmd_input(){
 	return mas;
 }
 
-
+void swap(struct humen *mas, int i, int j){
+	char name_last[50], surname_last[50];
+	strcpy(name_last,mas_sort[i].name);                     
+	strcpy(surname_last,mas_sort[i].surname);
+	int age_last = mas_sort[i].age;
+	strcpy(mas_sort[i].name,mas_sort[j].name);
+	strcpy(mas_sort[i].surname,mas_sort[j].surname);
+	mas_sort[i].age = mas_sort[j].age;
+	strcpy(mas_sort[j].name,name_last);
+	strcpy(mas_sort[j].surname,surname_last);
+	mas_sort[j].age = age_last;
+	
+}
 
 
 int main(){
-	struct humen *mas, *mas_sort;
-	int min = 0, min_last = 99999, min_num;
+	struct humen *mas;
 	mas = file_input();
-	mas_sort = (humen*)malloc(lines_count*sizeof(humen));
+	mas_sort = mas;
 	
-	for(int i = 0; i < lines_count; i++){
-		min_last = 99999;
-		for(min_num = 0; min_num < (lines_count+1); min_num++){
-			if(mas[min_num].age != NULL){
-				if(MIN(mas[min_num].age,min_last)){
-				min_last = mas[min_num].age;
-				min = min_num;
-				}
-			}
-			
-		}
-		strcpy(mas_sort[i].name, mas[min].name);
-		strcpy(mas_sort[i].surname, mas[min].surname);
-		mas_sort[i].age = mas[min].age;
-		mas[min].age = NULL;
-	}
-	
+	for (int i = 0; i < lines_count - 1; i++)
+    {
+        for (int j = 0; j < lines_count - i - 1; j++)
+        {
+            if (mas_sort[j].age > mas_sort[j + 1].age)
+                swap(mas_sort, j, j + 1);
+        }
+    }
 	
 	for(int i = 0;i < lines_count;i++){
 		printf("Name: %s Surname: %s Birth year: %d\n",mas_sort[i].name,mas_sort[i].surname,mas_sort[i].age);
