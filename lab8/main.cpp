@@ -6,12 +6,19 @@ struct humen
 {
 	char name[50];
 	char surname[50];
-	int age;
+	int byear;
 	char gender[6];
 	double height;
 };
 
 int lines_count;
+
+void swap(struct humen *mas, int i, int j){
+	struct humen temp;
+	temp = mas[i];
+	mas[i] = mas[j];
+	mas[j] = temp;
+}
 
 humen *file_input(){
 	FILE *data = fopen("input.txt","r");
@@ -29,25 +36,52 @@ humen *file_input(){
     
     data = fopen("input.txt","r");
     while(i < lines_count){
-    	fscanf(data, "%s %s %d %s %lf", &mas[i].name, &mas[i].surname, &mas[i].age, &mas[i].gender, &mas[i].height);
+    	fscanf(data, "%s %s %d %s %lf", &mas[i].name, &mas[i].surname, &mas[i].byear, &mas[i].gender, &mas[i].height);
     	i++;
 	}
 	fclose(data);
 	return mas;
 }
 
-humen *sort(struct humen *mas){
+humen sort(struct humen *mas, char *chosen_oper){
+	int should_swap = 0;
+	for (int i = 0; i < lines_count - 1; i++){
+        for (int j = 0; j < lines_count - i - 1; j++){
+			if(strcmp(chosen_oper, "name") == 0)
+				should_swap = strcmp(mas[j].name, mas[j+1].name) > 0;
+			else if(strcmp(chosen_oper, "surname") == 0)
+				should_swap = strcmp(mas[j].surname, mas[j+1].surname) > 0;
+			else if(strcmp(chosen_oper, "byear") == 0)
+				should_swap = mas[j].byear > mas[j+1].byear ? 1:0;
+			else if(strcmp(chosen_oper, "gender") == 0)
+				should_swap = strcmp(mas[j].gender, mas[j+1].gender) > 0;
+			else if(strcmp(chosen_oper, "height") == 0)
+				should_swap = mas[j].height > mas[j+1].height ? 1:0;
+			
+			if(should_swap == 1)
+				swap(mas, j, j+1);
+	    }
+	}
+}
+
+humen *choose_sort(struct humen *mas){
 	struct humen *mas_sort;
 	char chosen_oper[10];
-	mas_sort = (humen*)malloc(lines_count*sizeof(humen));
-	printf("Will you use multiply sorting?(+/-) ");
+	printf("Will you use multisorting?(+/-) ");
 	scanf("%s", &chosen_oper);
 	if(strcmp("+",chosen_oper) == 0){
-		printf("1");
+		char chosen_oper1[10];
+		printf("Choose main parameter to sort(name/surname/byear/gender/height): ");
+		scanf("%s", &chosen_oper);
+		printf("Choose subparameter to sort(name/surname/byear/gender/height): ");
+		scanf("%s", &chosen_oper1);
+		sort(mas,chosen_oper1);
+		sort(mas,chosen_oper);
 	}
 	else{
-		printf("Choose parameter to sort(Name/Surname/Byear/Gender/Height): ");
+		printf("Choose parameter to sort(name/surname/byear/gender/height): ");
 		scanf("%s", &chosen_oper);
+		sort(mas,chosen_oper);
 		
 	}
 }
@@ -55,8 +89,11 @@ humen *sort(struct humen *mas){
 int main(){
 	struct humen *mas;
 	mas = file_input();
-	sort(mas);
-//	printf("%s %s %d %s %lf", mas[0].name, mas[0].surname, mas[0].age, mas[0].gender, mas[0].height);
+	choose_sort(mas);
+	for(int i = 0; i < lines_count; i++){
+		printf("%s %s %d %s %lf\n", mas[i].name, mas[i].surname, mas[i].byear, mas[i].gender, mas[i].height);
+	}
+	free(mas);
 	
 	return 0;
 }

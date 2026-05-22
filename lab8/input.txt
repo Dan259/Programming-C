@@ -1,2 +1,5 @@
 Valeryy Ignatenko 2004 male 1.67
-Svetlana Z 1967 female 1.52
+Svetlana Zentinova 1968 female 1.52
+Michail Zubenko 1969 male 2.0
+Ivan Zolo 2008 male 1.0
+Ivan Zentinov 1968 male 1.25
