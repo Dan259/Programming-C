@@ -3,6 +3,6 @@
 #include <stdarg.h>
 
 int main(){
-	math(4,2,3,4,5);
+	math(5,2,1,4,0,3);
 	return 0;
 }
