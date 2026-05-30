@@ -2,14 +2,22 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define MAX(arr,cnt) do { \
+#define MAX(arr,cnt) \
 	int max = 0; \
 	for(int j = 0; j < cnt;j++){ \
 		if(arr[j] > max) \
 			max = arr[j]; \
 	} \
-	printf("%d",max); \
-} while(0)
+	printf("%d",max); 
+	
+#define Arif(arr, cnt) \
+	int sum = 0; \
+	double arif = 0; \
+	for(int j = 0; j < cnt;j++){ \
+		sum += arr[j]; \
+	} \
+	arif = sum / cnt; \
+	printf("%lf",arif);
 
 
 
@@ -28,5 +36,5 @@ int main(){
 		i++;
 	}
 	
-	MAX(row,i);
+	Arif(row,i);
 }
