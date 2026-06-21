@@ -29,7 +29,7 @@ int math(int cnt, ...){
 	
 	for(int i = 0; i < cnt; i++){
 		nums[i] = va_arg(num, int);
-		sum += num[i];
+		sum += nums[i];
 	}
 	
 	sr_arif = sum / cnt;
