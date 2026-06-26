@@ -5,11 +5,11 @@
 int main(){
 	char exam[100], exam1[100];
 	printf("Enter your example:");
-	scanf(" %[^\n]", &exam1);
+	scanf(" %[^\n]", exam1);
 	
 	exam[0] = exam1[0];
 	for(int i = 1, j = 1; i < strlen(exam1);i++){
-		if(exam1[i] == '+' || exam1[i] == '-'){
+		if(exam1[i] == '+' || exam1[i] == '-' || exam1[i] == '*'){
 			exam[j] = ' ';
 			exam[j+1] = exam1[i];
 			exam[j+2] = ' ';
@@ -51,6 +51,8 @@ int main(){
 		}
 		else if(znak[i] == '-')
 			res -= num[i+1];
+		else if(znak[i] == '*')
+			res *= num[i+1];
 	}
 	printf("%lf", res);
 	
