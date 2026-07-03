@@ -1,61 +1,49 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+int get_dna_code(char c) {
+    switch (c) {
+        case 'N': return 0;
+        case 'A': return 1;
+        case 'C': return 2;
+        case 'G': return 4;
+        case 'T': return 7;
+        default:  return -1;
+    }
+}
+
 int main(int argc, char *argv[]) {
     FILE *inp = fopen(argv[1], "r");
-    FILE *out = fopen("output.bin", "w");
-    
+    FILE *out = fopen("output.bin", "wb"); 
+
     long long count_A = 0, count_C = 0, count_G = 0, count_T = 0, count_N = 0;
-
-    unsigned long long buffer = 0; 
+    long long int buffer = 0; 
     int bits_count = 0;
-
     int c;
+
     while ((c = fgetc(inp)) != EOF) {
-        int val = -1;
+        int val = get_dna_code(c);
+    
+        if (val == -1) continue; 
 
-        if (c == 'A') { val = 1; count_A++; }
-        else if (c == 'C') { val = 2; count_C++; }
-        else if (c == 'G') { val = 4; count_G++; }
-        else if (c == 'T') { val = 7; count_T++; }
-        else if (c == 'N') { val = 0; count_N++; }
-        else { continue; }
+        if (c == 'A') count_A++;
+        else if (c == 'C') count_C++;
+        else if (c == 'G') count_G++;
+        else if (c == 'T') count_T++;
+        else if (c == 'N') count_N++;
 
-        if (bits_count + 3 <= 64) { 
-            buffer = (buffer << 3) | val;
-            bits_count += 3;
-        } 
-        else {
-            
-            int space = 64 - bits_count;
-            
-            int top_bits = val >> (3 - space); 
-            buffer = (buffer << space) | top_bits;
-            
-            fwrite(&buffer, sizeof(unsigned long long), 1, out);
-            
-            buffer = 0;
-            bits_count = 0;
-            
-            int remaining_bits = 3 - space;
-            int mask = (1 << remaining_bits) - 1;
-            int bottom_bits = val & mask;
-            
-            buffer = bottom_bits;
-            bits_count = remaining_bits;
-        }
+        buffer |= ((long long int)val << bits_count);
+        bits_count += 3;
 
-
-        if (bits_count == 64) {
-            fwrite(&buffer, sizeof(unsigned long long), 1, out);
+        if (bits_count == 63) {
+            fwrite(&buffer, sizeof(long long int), 1, out);
             buffer = 0;
             bits_count = 0;
         }
     }
 
     if (bits_count > 0) {
-        buffer = buffer << (64 - bits_count);
-        fwrite(&buffer, sizeof(unsigned long long), 1, out);
+        fwrite(&buffer, sizeof(long long int), 1, out);
     }
 
     fclose(inp);
